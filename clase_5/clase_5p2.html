@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function funcion1(fecha){
+            return fecha
+        };
+        //promesas fecht
+        const promesa = new Promise((resolve , reject) => {resolve(funcion1)
+            resolve(); 
+        })
+            .then(resolve => {
+                return resolve;//el then me trae el valor
+            }).then(data => {
+                console.log(data);
+            });//el punto y coma va en donde termina la promesa
+
+
+        //_________________________________________________________________________//
+
+            const Option = {
+                method : "GET"
+            }; 
+
+
+            fetch("url" , Option)//(url,option(metodos , body o headthers))//peticion fetch
+            .then(resul => resul.json())//pardceo a json osea lo convierte a objeto
+            .then(data => console.log(data))//enves de data puedo poner que me traiga una imagen etc
+            .catch(error => console.log("no existe el pokemon"));//catch es para errores
+                
+            
+            //async/awayt
+
+            const consultarpokemon =async/*asincronica*/()=>{
+                try{
+                const pokemon = await fetch("url" , Option);
+                console.log(await pokemon.json());
+                const data = console.log(data); 
+            }/*el try me permite ver si se cumple o no */catch(error){
+                console.log("no existe el pokemon")
+            }
+        };//esto es otra forma de escribir lo de arriba //mas utilizada es la que tenemos que usar 
+
+            consultarpokemon();
+    </script>
+</body>
+</html>

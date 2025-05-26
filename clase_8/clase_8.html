@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <script>
+        //local storage , en el browser
+        // Guardar datos
+        localStorage.setItem("usuario", "Juan");
+        // Leer datos
+        const nombre = localStorage.getItem("usuario");
+        // Borrar datos
+        localStorage.removeItem("usuario");
+        // Borrar TODOS datos
+        localStorage.removeItem.clear();
+        //modulos
+        //Archivo suma.js:
+        export function sumar(a, b) {
+        return a + b;
+                }
+
+        //Archivo main.js:
+        import { sumar } from './suma.js'; 
+        //Relativo al origen del archivo JS que hace la carga en el servidor -> js/main.js → js/suma.js
+        console.log(sumar(2, 3)); // Imprime 5
+        //tubo de midware ycomo arrancar un port
+        const express = require("express");
+        const app = express()
+        const port = 3050
+
+        app.listen(port, () => {
+        console.log(`Servidor escuchando en http://localhost:${port}`);
+        });
+
+        
+        app.get("/",(req,res)=>{res.send("hola")})        
+
+        const autenticado = true;
+        const autorizado = true;        
+
+        function autenticar(req,res,next){
+            if(autenticado){
+                next()
+            }else{
+                res.send("no autenticado")
+            }
+        };
+
+        function autorizar(req,res,next){
+            if(autorizado){
+                next()
+            }else{
+                res.send("no autorizado")
+            }
+        };
+
+        app.get("/",autenticar());//funcionpara autenticar al usuario        
+
+        //endpoint
+        app.get("/miruta",(res,res, next)=>res.send("hola"))
+                //eel next concatena
+       
+
+        //corse:forma de configurar lo que aparece en el brawser
+        const cors = require("cors");
+        app.use(cors());   
+        
+    
+    </script>
+</body>
+</html>

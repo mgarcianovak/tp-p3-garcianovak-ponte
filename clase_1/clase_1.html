@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="clase_2css.css">/3/
+</head>
+<body>
+
+<p style="color: rgb(38, 0, 255);">hola soy lucas</p>/2/por linea
+    <h1>titulo enorme</h1>
+    <h4>titulo chico</h4>
+
+    <p class="b1 b2">parrafo: ,messi es el mejor de la historia</p>
+    <p class="b2"> listo</p>
+    <p>lista ordenada:</p>
+    <ol>
+        <p>list item li</p>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ol>
+    <p>lista desordenada</p>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <form action="usuario.png" method="post"> /ruta relativa/
+        <button>enviar</button>
+        <input id="text" name="hola" type="button">
+        <button>ingresar</button>
+        <input id="text" name="usuario"  type="text">
+        <input type="usuario.png" name="usuario" id="text">
+        <a target="_blank" href="https://www.google.com.mx/">reditrecciono a google</a> /vinculos o enlaces/ /ruta absoluta/ <br> /target blank: habro nueva pestañ/
+        <a href="/clase_2.html">habre segunda pag</a> 
+    </form>
+    /formularios:/
+    <div>
+        <form action="" >
+            <label for="nombre">ingresa tu nombre:</label>
+            <input type="text" name="nombre" id="nombre" placeholder="ingrese su nombre"> /etiqueta principal/placeholder: que hace la persona/
+            <div>
+                <label for="edad">ingresa su edad:</label>
+                <input type="number" name="edad" id="edad" placeholder="ingrese su edad" required>/required: este campo va si o si/
+            </div>
+            <div>
+                <label for="email">ingresa su email:</label>
+                <input type="email" name="email" id="email" placeholder="ingrese su correo electronico">/gmail: me bloquea que no tenga el @/
+            </div>
+            <div>
+                <label for="password">ingresa su contraseña:</label>
+                <input type="password" name="password" id="password" placeholder="ingrese su contraseña" required>/password: no aparece lo que ecribo/
+            </div>
+            <div>
+                <label for="checkbox">ingresa su checkbox:</label>
+                <input type="checkbox" name="checkbox" id="checkbox" placeholder="ingrese su checkbox">/me permite seleccionar si si o no /
+            </div>
+            <div>       
+                <input type="radio" name="radio" id="radio1" value="1">
+                <label for="radio">ingresa su radio1:</label> 
+                <input type="radio" name="radio" id="radio2" value="2">
+                <label for="radio">ingresa su radio2:</label> 
+                <input type="radio" name="radio" id="radio3" value="3">
+                <label for="radio">ingresa su radio3:</label> /radio:me permite seleccionar entre varios/
+            </div>
+            <div>
+                <label for="pais">pais de origen:</label>
+                <select name="pais" id="pais">
+                    <option value="1">argentina</option>
+                    <option value="2">brasil</option>
+                    <option value="3" selected>uruguay</option>
+                </select>/me permite seleccionar un dato epecifico /options es exclusivo de select/selected: lo pone que aparesca de primero/
+            </div>
+            <div>
+                <label for="textarea">comentarios</label>
+                <textarea name="textarea" id="textarea"  placeholder="ingrese su comentario" cols="40"> 
+                </textarea>/texto de nombre grande/ cols: ancho o alto del texto/
+            </div>
+                <button type="submit">enviar</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./clase_4p2.css">
+</head>
+<body>
+    <form name="form" id="padre"  method="post"> 
+        <input id="hijos" type="text" name="nombre" placeholder="ingrese su nombre">
+        <input id="apellido" type="text" class="input_apellido" name="nombre" placeholder="ingrese su apellido">
+        <button type="submit">summit</button>
+        <p class="c2">soy un parrafo</p>
+        <div id="s2" class="c1">soy otro parrafo</div>
+
+
+    </form>
+
+    <script>//llamo a java siempre abajo de todo 
+        //const input = document.getElementById("name")//guardo el nodo con id name
+        //const inputs = document.getElementsByTagName("input") //guardo con el nombre del tag
+        //const form = document.getElementsByName("form")//guardo con el nombre del form
+    
+        //console.log(inputs)
+
+        //const input = document.querySelector("input.input_apellido");//asi agarra por name y class.solo agarra por name,si le pongo # agarra por id , si es por class es .nameclass
+        //const inputs = document.querySelectorAll("input")//me lo trae y lo mete en el array
+        //console.log(inputs)
+
+        //const form = document.querySelector("form");
+        //const children = form.children//firstchildren agarra mi primer hijo // last lo mismo con el ultimo // children[x] agarra por index
+        //const parent = input.parentnode//agarro a mi padre atraves del hijo
+        //console.log(parent)
+
+        const p = document.querySelector("p");
+        p.innerText = "actualizado" // permite ingresar solo texto
+        const div = document.querySelector("#s2") 
+        
+        div.innerHTML = "<h1>me actualizaron mal<h1>" // pone texto tal cual
+        div.classList.remove("c1")//remueve el stilo
+        div.classList.add("c2")//agrega el stilo 2
+        div.classList.toggle("c1")//si no lo tiene lo agrega
+        div.classList.toggle("c1")//si lo tiene lo quita 
+        div.classList.contains("c1")//me devuelve true o false si tiene la clase o no 
+
+        const button = document.createElement("button");//crea elementos
+        div.appendChild(button); // lo agrtega al div en este caso siempre al principio
+        button.innerText = "soy un boton"//le ingresa un texto
+        button.classList.add("c1") // le pone color
+        
+        const form = document.querySelector("form")
+        form.addEventListener("submit" , async(event)=>{
+            event.preventDefault()//le saco el comportamiento por default
+            const inputs =  form.elements //trae los hijos
+            const nombre = inputs.hijos.value//traigo el valor de una variable
+            const apellido = inputs.apellido.value
+            //inputs.classList.add("border");
+            console.log(nombre , apellido);
+        })//disparador/ tengo que poner el typo que esta adentro del form/async event funcion le pone una funcionm
+
+        const div2 = document.querySelector("#s2")
+        div2.addEventListener("click" , async(event)=>{
+            console.log("me cliquearon")
+            div2.innerHTML = "click"
+        })//evento de cliqueo
+    </script>
+</body>
+</html>

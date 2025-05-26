@@ -1,0 +1,46 @@
+.cont{
+    display: grid;
+    grid-template-columns:repeat(4,200px);
+    grid-template-rows:repeat( 4, 200px);
+    grid-column-gap:0vw;
+    grid-row-gap: 0vh;
+    background-color: black;
+}
+
+.c1{
+    background-color: blue;
+    grid-area:2 / 2 / 3 / 3;
+}
+
+.c2 { 
+    background-color: white;
+    grid-area: 2 / 3 / 3 / 4; 
+}
+
+.c3 { 
+    background-color: brown;
+    grid-area: 3 / 2 / 4 / 3; 
+}
+
+.c4 { 
+    background-color: blueviolet;
+    grid-area:  3 / 3 / 4 / 4; 
+}
+
+.c5 {
+    background-color: aqua;
+    grid-area: 3/4/4/5;/*row-start: 3 → empieza en la fila 3.
+
+    column-start: 3 → empieza en la columna 3.
+    
+    row-end: 4 → termina antes de la fila 4 (o sea, ocupa solo la fila 3).
+    
+    column-end: 4 → termina antes de la columna 4 (o sea, ocupa solo la columna 3).*/
+}
+
+.c6 {
+    background-color: cadetblue;
+    grid-area: 3/5 /4/3;
+}
+
+

@@ -1,0 +1,12 @@
+.c1 {
+    color: red;
+}
+
+.c2{
+    color: blue;
+}
+
+.borde{
+    border-color: red;
+    border-width: 5px;
+}

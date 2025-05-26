@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*peticion */
+        //index.html
+        //host
+        //algo.arg
+        function pid(id){
+            return document.getElementById(id);
+        }
+
+        function cargaralgo(){
+            let requeste = new XMLHttpRequest();//peticion xml
+        requeste.open("get", id="ad", true);//(metodo,url,asincronico)//a donde lo mando
+        requeste.onreadystatechange = ()=>{
+            if(requeste.readyState==4){
+                if(requeste.status == 200){
+                    console.log("respuesta exitosa");
+                    let r = JSON.parse(requeste.responseText);//el objeto a memoria
+                    let img = pid("imagen");//traigo la imagen del objeto
+                    img.setAttribute("src",r.image_uris.normal);//la scr de la imagen y donde esta en el objeto
+                }/*esto es que fue exitosa*/else{
+                    alert("respuesta fallida")
+                }
+            }//el 4 es que la solicitud se termino de pronunciar
+        };//todo esto pasa en segundo plano
+        requeste.send("hola");//lo que mando//dentro del cuerpo de la solicitud//lo ultimo que se hace//si yo pongo algo aca abajo lo ejecuta antes de que acepte la solicitud
+        console.log("");//primero se ejecuta lo que esta aca
+        };//todo adentro de una funcion
+
+
+
+    </script>
+    
+
+</body>
+</html>

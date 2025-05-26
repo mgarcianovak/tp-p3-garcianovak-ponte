@@ -1,0 +1,51 @@
+
+.b1{
+    color: blue;
+    text-decoration: underline;
+    font-style: italic;
+}
+.b2{
+    border: black solid 3px;
+}
+
+#id1{
+    border: black solid 3px;
+    width: 18px;
+}
+#id2 {border: black solid 3px; 
+    width: 54px;}
+ 
+#id3 {border: black solid 3px;
+    width: 55px;}   
+
+#id4{border: black solid 3px;
+    width: 39px;}
+
+#id5{border : black solid 3px;
+    width: 50px;}
+
+#id6{border : black solid 3px;
+    width: 58px;}
+
+#id7{border : black solid 3px;
+    width: 68px;}
+
+#id8{border : black solid 3px;
+    width: 36px;}
+
+#id9{border : black solid 3px;
+    width: 59px;}   
+
+#id10{border : black solid 3px;
+    width: 62px;}  
+    
+.b3 {
+    border: black solid 3px ;
+    width: 300px;
+}
+
+.b4 {
+    border: black solid 3px;
+}
+
+           

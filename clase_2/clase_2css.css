@@ -1,0 +1,14 @@
+h1 {color: red;}
+
+#nombre {
+    border: red solid 5px;
+    color: darkgreen; 
+}
+
+.b1 {
+    border: red solid 5px;
+}
+
+.b2 {
+    background: green;
+}

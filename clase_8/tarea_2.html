@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/clase_8/tarea_2.css">
+</head>
+<body>
+    <label id="titulo" class="f1" >formulario lista:</label>
+    <form  id="formLista" class="formLista">
+        <table>
+            <thead>
+                <tr>
+                    <div class="c1"><label>id</label></div>
+                    <div class="c2"><label>nombre</label></div>
+                    <div class="c3"><label>apellido</label></div>
+                    <div class="c4"><label>edad</label></div>
+                    <div class="c5"><label>equipo</label></div>
+                    <div class="c6"><label>posicion</label></div>
+                    <div class="c7"><label>cantgoles</label></div>
+                    <div class="c8"><label>titulo</label></div>
+                    <div class="c9"><label>facultad</label></div>
+                    <div class="c10"><label>añograd</label></div>
+                    <div class="c11"><label>modificar</label></div>
+                    <div class="c12"><label>eliminar</label></div>
+                    <tbody id="tbody" ></tbody> 
+                </tr>
+            </thead>
+        </table>
+    </form>
+    <button class="f2" id="agregar">agregar elemento</button>
+    <form id="form_abm" class="hidden">
+        <div class="f1"><label >formulario abm:</label></div>
+        <table>
+            <thead>
+                <tr>
+                    <div class="f2"><label >id:</label><input id="id" type="text" placeholder="ej: 3" disabled></div>
+                    <div class="f2"><label >nombre:</label><input id="nombre" type="text" placeholder="ej:lucas"></div>
+                    <div class="f2"><label >apellido:</label><input id="apellido" type="text" placeholder="ej:ponte"></div>
+                    <div class="f2"><label >edad:</label><input id="edad" type="number" placeholder="ej:19"></div>
+                    <div class="f2"><label >equipo:</label><input id="equipo" type="text" placeholder="ej:boca"></div>
+                    <div class="f2"><label >posicion:</label><input id="posicion" type="text" placeholder="ej:delantero"></div>
+                    <div class="f2"><label >cantgoles:</label><input id="cantgoles" type="text" placeholder="ej:10"></div>
+                    <div class="f2"><label >titulo:</label><input id="titulo" type="text" placeholder="ej:programador"></div>
+                    <div class="f2"><label >facultad:</label><input id="facultad" type="text" placeholder="ej:utn"></div>
+                    <button class="f2" id="btnaceptar">aceptar</button>
+                    <button class="f2" id="btncancelar">cancelar</button>
+                </tr>
+            </thead>
+        </table>
+    </form>
+    
+    </div>
+    <div id="spinner" class="hidden">
+        <div></div>
+    </div>
+    <script>
+        class Persona{
+            constructor(id, nombre, apellido, edad){
+            this.id = id;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.edad = edad;
+            }
+        };
+
+        class Futbolista extends Persona{
+            constructor(id, nombre, apellido, edad, equipo, posicion, cantgoles){
+            super(id, nombre, apellido, edad);
+            this.equipo = equipo;
+            this.posicion = posicion;
+            this.cantgoles = cantgoles;
+            }
+        };
+
+        class Profesional extends Persona{
+            constructor(id, nombre, apellido, edad,titulo,facultad,añograd){
+                super(id, nombre, apellido, edad);
+                this.titulo = titulo;
+                this.facultad = facultad;
+                this.añograd = añograd;
+            };
+        };
+    
+        class Modelo{
+            constructor() {
+                this.Personas = [];
+            }
+        }
+
+        class Vista{
+            formLista;
+            formabm;
+            constructor(){
+                this.formLista = this.$("formLista");
+                this.formabm = this.$("form_abm");
+                this.tbody = this.$("tbody");
+                this.titulo = this.$("titulo");
+                this.spinner = document.getElementById("spinner");
+                this.btnagregar = this.$("agregar");
+                this.btnaceptar = this.$("btnaceptar");
+                this.btncancelar = this.$("btncancelar");
+            };
+
+            $(id){
+                return document.getElementById(id)
+            }
+
+            mostrarSpinner(show) {
+                this.spinner.classList.toggle("hidden", !show);
+            }
+
+            renderizarTabla(personas) {
+                this.tbody.innerHTML = "";
+
+                personas.forEach(p => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                    <td >${p.id}</td>
+                    <td >${p.nombre}</td>
+                    <td >${p.apellido}</td>
+                    <td >${p.edad}</td>
+                    <td >${p.equipo || "N/A"}</td>
+                    <td >${p.posicion || "N/A"}</td>
+                    <td >${p.titulo || "N/A"}</td>
+                    <td >${p.facultad || "N/A"}</td>
+                    <td >${p.añograd || "N/A"}</td>
+                    <td><button class="btn-modificar"  data-id="${p.id}">Modificar</button></td>
+                    <td><button class="btn-eliminar"  data-id="${p.id}">Eliminar</button></td>
+                    `
+                    this.tbody.appendChild(tr);
+                });
+                // Asigna eventos a todos los botones de modificar
+                document.querySelectorAll(".btn-modificar").forEach(btn => {
+                    btn.addEventListener("click", (e) => {
+                        const id = parseInt(e.target.dataset.id);
+                        control.editarPorId(id);
+                    });
+                });
+                document.querySelectorAll(".btn-eliminar").forEach(btn => {
+                    btn.addEventListener("click", (e) => {
+                        const id = parseInt(e.target.dataset.id);
+                        control.prepararEliminacion(id);
+                    });
+                });
+            }
+        
+
+
+
+            mostrartabla(){
+                this.formLista.classList.add("hidden");
+                this.titulo.classList.add("hidden");
+                this.btnagregar.classList.add("hidden")
+                this.formabm.classList.remove("hidden");
+            }
+
+            mostrarLista(){
+                this.formLista.classList.remove("hidden");
+                this.titulo.classList.remove("hidden");
+                this.btnagregar.classList.remove("hidden");
+                this.formabm.classList.add("hidden");
+            }
+
+            
+        }
+    
+        class Control{
+            vista;
+            modelo;
+
+            constructor(l_vista,l_modelo){
+                this.vista = l_vista;
+                this.modelo  = l_modelo;
+                this.personaEnEdicion = null;
+                this.URL = "https://examenesutn.vercel.app/api/PersonasFutbolistasProfesionales";//conjunto de reglas y protocolos que permiten que diferentes programas de software se comuniquen entre sí para compartir datos y funcionalidades
+                this.cargarDatosIniciales();
+                this.vista.btnagregar.addEventListener("click" , ()=> {this.vista.mostrartabla()});
+                this.vista.btnaceptar.addEventListener("click" , (e)=> {
+                    e.preventDefault();
+                    this.created();
+                });
+                
+                
+            }
+            cargarDatosIniciales() {
+
+            this.vista.mostrarSpinner(true);
+
+            fetch(this.URL, { method: "get", headers: { "Content-Type": "application/json" } })
+                .then(response => response.json())
+                .then(data => {
+                    
+                    const arrayDePersonas = data.map(persona => {
+                        if (persona.equipo) {
+                            return new Futbolista(persona.id, persona.nombre, persona.apellido, persona.edad, persona.equipo, persona.posicion , persona.cantgoles);
+                        } else {
+                            return new Profesional(persona.id, persona.nombre, persona.apellido, persona.edad, persona.titulo, persona.facultad , persona.añograd);
+                        }
+                    })
+
+                    this.modelo.Personas = arrayDePersonas;//todo lo que va a modelo es lo que tengo que poner en persona
+                    this.vista.renderizarTabla(this.modelo.Personas);
+                    
+                    
+                })
+                .catch(err => {
+                    console.log({ a: err.message });
+                    window.alert("Error al cargar los datos")
+                })
+                .finally(() => {
+                    console.log("promesa finalizada");
+                    this.vista.mostrarSpinner(false);
+                });
+            
+                //modificar
+                    const persona = this.modelo.Personas.find(p => p.id === id);
+
+                    this.vista.mostrartabla();
+                    this.personaEnEdicion = persona;
+
+                    // Completa los campos
+                    this.vista.$("id").value = persona.id;
+                    this.vista.$("nombre").value = persona.nombre;
+                    this.vista.$("apellido").value = persona.apellido;
+                    this.vista.$("edad").value = persona.edad;
+
+                    if (persona instanceof Futbolista) {
+                        this.vista.$("equipo").value = persona.equipo;
+                        this.vista.$("posicion").value = persona.posicion;
+                        this.vista.$("cantgoles").value = persona.cantgoles;
+                        this.vista.$("titulo").value = "";
+                        this.vista.$("facultad").value = "";
+                    } else {
+                        this.vista.$("titulo").value = persona.titulo;
+                        this.vista.$("facultad").value = persona.facultad;
+                        this.vista.$("equipo").value = "";
+                        this.vista.$("posicion").value = "";
+                        this.vista.$("cantgoles").value = "";
+                    }
+                
+                this.vista.btnaceptar.addEventListener("click" , async () => {
+
+                        const id = parseInt(this.vista.$("id").value);
+                        const nombre = this.vista.$("nombre").value;
+                        const apellido = this.vista.$("apellido").value;
+                        const edad = parseInt(this.vista.$("edad").value);
+
+                        const data = {
+                            id,
+                            nombre,
+                            apellido,
+                            edad
+                        };
+
+                        if (this.personaEnEdicion instanceof Futbolista) {
+                            data.equipo = this.vista.$("equipo").value;
+                            data.posicion = this.vista.$("posicion").value;
+                            data.cantgoles = parseInt(this.vista.$("cantgoles").value);
+                        } else {
+                            data.titulo = this.vista.$("titulo").value;
+                            data.facultad = this.vista.$("facultad").value;
+                            data.añograd = parseInt(this.vista.$("añograd")?.value || 0);
+                        }
+
+                        this.vista.mostrarSpinner(true);
+
+                        try {
+                            fetch(this.URL, {
+                                method: "PUT",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(data)
+                            });
+
+                            
+
+                            alert("Modificado con éxito");
+                            this.cargarDatosIniciales();  // recarga tabla
+                            this.vista.mostrarLista();
+                        } catch (err) {
+                            alert("Error: " + err.message);
+                        } finally {
+                            this.vista.mostrarSpinner(false);
+                            this.personaEnEdicion = null;
+                        }
+                        })
+                    
+                }
+            
+
+            
+            prepararEliminacion(id) {
+            const persona = this.modelo.Personas.find(p => p.id === id);
+            if (!persona) return alert("Persona no encontrada");
+
+            this.personaEnEdicion = persona;
+
+            // Mostrar formulario ABM con datos
+            this.vista.mostrartabla();
+            this.vista.$("id").value = persona.id;
+            this.vista.$("id").disabled = true;
+
+            this.vista.$("nombre").value = persona.nombre;
+            this.vista.$("apellido").value = persona.apellido;
+            this.vista.$("edad").value = persona.edad;
+
+            // Ocultar todos
+            ["equipo", "posicion", "cantgoles", "titulo", "facultad", "añograd"].forEach(campo => {
+                const input = this.vista.$(campo);
+                if (input) input.parentElement.style.display = "none";
+            });
+
+            // Mostrar solo los correspondientes
+            if (persona instanceof Futbolista) {
+                ["equipo", "posicion", "cantgoles"].forEach(campo => {
+                    const input = this.vista.$(campo);
+                    if (input) {
+                        input.value = persona[campo];
+                        input.parentElement.style.display = "block";
+                    }
+                });
+                this.vista.titulo.textContent = "Eliminar Futbolista";
+            } else {
+                ["titulo", "facultad", "añograd"].forEach(campo => {
+                    const input = this.vista.$(campo);
+                    if (input) {
+                        input.value = persona[campo];
+                        input.parentElement.style.display = "block";
+                    }
+                });
+                this.vista.titulo.textContent = "Eliminar Profesional";
+            }
+
+            this.configurarEliminar();
+        }
+        Copiar
+        Editar
+        configurarEliminar() {
+            // Evita múltiples listeners
+            const nuevoBoton = this.vista.btnaceptar.cloneNode(true);
+            this.vista.btnaceptar.parentNode.replaceChild(nuevoBoton, this.vista.btnaceptar);
+            this.vista.btnaceptar = nuevoBoton;
+
+            this.vista.btnaceptar.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const id = this.personaEnEdicion.id;
+
+                this.vista.mostrarSpinner(true);
+
+                try {
+                    const response = await fetch(this.URL, {
+                        method: "DELETE",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ id })
+                    });
+
+                    if (!response.ok) throw new Error("Error al eliminar");
+
+                    alert("Eliminado con éxito");
+
+                    this.modelo.Personas = this.modelo.Personas.filter(p => p.id !== id);
+                    this.vista.renderizarTabla(this.modelo.Personas);
+                    this.vista.mostrarLista();
+                } catch (err) {
+                    alert("Error: " + err.message);
+                } finally {
+                    this.vista.mostrarSpinner(false);
+                    this.personaEnEdicion = null;
+                }
+            });
+        }
+
+            
+
+
+            created() {
+                this.vista.mostrarSpinner(true);
+                const id = document.getElementById("id").value;
+                const nombre = document.getElementById("nombre").value;
+                const apellido = document.getElementById("apellido").value;
+                const edad = parseInt(document.getElementById("edad").value);
+                const equipo = document.getElementById("equipo").value;
+                const posicion = document.getElementById("posicion").value;
+                const titulo = document.getElementById("titulo").value;
+                const facultad = document.getElementById("facultad").value;
+
+
+
+                let persona;
+                if (equipo && posicion) {
+                    persona = new Futbolista(id, nombre, apellido, edad, equipo, posicion);
+                    persona.cantidadGoles = 10
+                } else if (titulo && facultad) {
+                    persona = new Profesional(id, nombre, apellido, edad, titulo, facultad);
+                    persona.añoGraduacion = 2005
+                }
+                delete persona.id;
+
+                console.log({ persona });
+
+                const optios = {
+                    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(persona)
+                }
+
+                fetch(this.URL, optios)
+                    .then(response => response.text())
+                    .then(data => {
+                        console.log({ data });
+                        persona.id = JSON.parse(data).id
+
+                        this.vista.mostrarLista();
+
+                        const arrayDePersonas = [...this.modelo.Personas, persona];
+
+                        this.modelo.Personas = arrayDePersonas;
+
+                        this.vista.renderizarTabla(this.modelo.Personas);
+
+                    })
+                    .catch(err => {
+                        console.log({ a: err.message });
+
+                    })
+                    .finally(() => {
+                        console.log("promesa finalizada");
+                        this.vista.mostrarSpinner(false);
+                    });
+
+                    
+            }
+
+        }
+    
+
+        const modelo = new Modelo();
+        const vista = new Vista();
+        const control = new Control(vista, modelo);
+    </script>
+</body>
+</html>

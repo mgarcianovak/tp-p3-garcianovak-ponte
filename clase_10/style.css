@@ -1,0 +1,58 @@
+.m-2{
+    text-decoration: underline blue;
+}
+
+main {
+  min-height: 100vh;
+}
+
+header {
+  color: blue; 
+  width: 100vw;
+  padding: 10px;
+}
+
+nav {
+  border: solid 5px blue;
+  float: left;
+  width: 25vh;
+  padding: 10px;
+  min-height: 8vh; 
+}
+
+
+#principal {
+  float: left;
+  width: 75vw;
+  padding: 10px; 
+}
+
+#series {
+  border: solid 3px black;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+    
+}
+
+
+
+@media (max-width: 899px) {
+  .serie {
+    flex:calc(50vw - 15px);
+  }
+}
+
+
+@media  (max-width: 549px) {
+  .serie {
+    flex:100vh;
+  }
+
+
+
+  nav, #principal {
+    width: 100vw;
+    
+  }
+}

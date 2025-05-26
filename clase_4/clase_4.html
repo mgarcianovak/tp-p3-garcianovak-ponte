@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log("holaS")/*consola*/
+        
+        function mi1(){
+            return "funcion";
+        }/*funciones*/
+        
+        var f = function f2(){
+            return "mi funcion 2"
+        }  /*otra forma de hacer funciones*/ 
+
+        var f2 = ()=>{return "funcion 2"}
+        console.log(f2()) /*funciones de flecha*/
+
+        //function ejecutarf(funcion){
+        //    funcion()
+        //}
+        //console.log(ejecutarf())/*parecido a una f lamda*/
+
+        function identificador (...params){
+            return [params];
+        }
+        console.log(identificador(1,2,3))//funcion que desagrega el array o el objeto , devuelve el objeto o array
+
+        var miObjeto = {nombre:"lucas"};//objeto
+
+        //array_________________________//
+        let v = new Array();//array nuevo, todo en java es array
+        v = [1,2,3]
+        console.log(v)
+        v.push("ultimo")//agrega a la lista (al final)
+        console.log(v.unshift())//agrega e al principio
+        v.pop()//elimina el ultimo
+        console.log(v.shift())//elimina el primer 
+        console.log(v.indexOf(1))//retorna el primer i ,si es un aobjeto le paso la ref del obj
+        console.log(v.join())//une los e del array
+        console.log(v.includes())//retorna true si existe el e sino retorna false
+
+        //json--------------------------//
+        var jason = "{´nombre´:´apellido´}"//formato json
+        
+        this//objeto que ejecuta la funcion
+
+        var p = {nombre: "juan" , apellido: "carlos"}
+        var s = JSON.stringify(p);//hace un json y le pasa el objeto del parametro//transorma el objeto a json
+        console.log(s);
+        
+        var j = JSON.parse(s)//transforma ewl json a objeto
+        console.log(p);
+
+        //poo______________________________//
+        class persona {
+            nombre;
+            apellido;
+            constructor(p_nombre , p_apellido){
+                this.nombre = p_nombre;
+                this.apellido = p_apellido;
+            }
+        }//clase con constructor
+        let clous = "por fuera"
+
+        class ciudadano extends persona{
+            #dni;
+            constructor(n,a,d){
+                super(n,a)
+                this.dni = d
+            
+            }
+            get nombrep(){
+                return this.nombre+""+this.apellido
+            }//hay get y set
+
+            imprclous(){
+                console.log(clous)
+            }// por mas que este afuera de la clase funciona igual 
+        }//clase con constructor que ereda de otra
+
+        //#privado//
+        
+
+        var o = new persona("lucas" ,"ponte");
+        console.log(o);
+
+        var f = new ciudadano("juan" , "oter" , 23025015);
+        console.log(f);
+
+        console.log(o instanceof persona);
+        console.log(o instanceof ciudadano);//no toda persona es un ciudadano
+
+
+        
+        
+
+
+   </script>
+    
+</body>
+</html>

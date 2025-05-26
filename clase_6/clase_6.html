@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/clase_2/tarea_c2.css">
+</head>
+<body>
+    <form id="formlista">
+        <div>
+            <h2 class="b1">form datos</h2>
+            <label for="filtro" >filtrar por:</label>
+            <select id="filtro" name="filtro" >
+                <option value="1"selected>todos</option>
+                <option value="2">futbolistas</option>
+                <option value="3">profesionales</option>
+            </select>
+        </div>
+        
+        <div>
+            <label for="edad1">calcular edad promedio:</label>
+            <input id="edad1" type="type">
+            <button id="edad2" >calcular</button>
+        </div>
+
+        <div>
+            <label for="columna">mostrar columnas:</label><br>
+            <input type="checkbox" id="ID" name="checkbox1" checked><label for="checkbox1">ID</label>
+            <input type="checkbox" id="Nombre" name="checkbox2" checked><label for="checkbox2" >Nombre</label>
+            <input type="checkbox" id="Apellido" name="checkbox3" checked><label for="checkbox3">Apellido</label>
+            <input type="checkbox" id="Edad" name="checkbox4" checked><label for="checkbox4">Edad</label>
+            <input type="checkbox" id="Equipo" name="checkbox5" checked><label for="checkbox5">Equipo</label>
+            <input type="checkbox" id="Posicion" name="checkbox6" checked> <label for="checkbox6">Posicion</label>
+            <input type="checkbox" id="cantGoles" name="checkbox7" checked><label for="checkbox7">cantGoles</label>
+            <input type="checkbox" id="titulo" name="checkbox8" checked><label for="checkbox8">titulo</label>
+            <input type="checkbox" id="Facultad" name="checkbox9" checked><label for="checkbox9">Facultad</label>   
+            <input type="checkbox" id="AñoGrad" name="checkbox10" checked><label for="checkbox10">AñoGrad</label>
+        </div>
+
+        <div>
+            <table id="tabla_1">
+                <tbody>
+                    <tr>
+                        <td id="tabla0" columna = "id1">--</td>
+                        <td id="tabla1" columna = "nombre1">--</td>
+                        <td id="tabla2" columna = "apellido1">--</td>
+                        <td id="tabla3" columna = "edad10">--</td>
+                        <td id="tabla4" columna = "equipo1">--</td>
+                        <td id="tabla5" columna = "posicion1">--</td>
+                        <td id="tabla6" columna = "cantGoles1" >--</td>
+                        <td id="tabla7" columna = "titulo1" >--</td>
+                        <td id="tabla8" columna = "facultad1">--</td>
+                        <td id="tabla9" columna = "AñoGrad1">--</td>
+                    </tr>
+                </tbody>
+                <tbody id="tbody">
+
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <button id="agregar" >agregar</button>
+        </div>
+
+    </form>
+    <form id="formabm">
+
+
+    </form>
+    <script>
+        //-----------------------practico 1 resuelto por todos----------//no quiere decir q el mio no funcione sino q esta es otra forma de acerlo
+        //modelo de datos
+        //clases(objetos planos)
+        class Persona{
+        constructor(id,nombre,apellido,edad){
+            this.id = id;
+            this.apellido = apellido;
+            this.nombre = nombre;
+            this.edad = edad;
+            };
+        }//bien
+        class Profecional extends Persona{
+            constructor(id, nombre, apellido, edad, titulo, facultad, añoGraduacion) {
+            super(id, nombre, apellido, edad);
+            this.titulo = titulo;
+            this.facultad = facultad;
+            this.anioGraduacion = añoGraduacion;
+            this.tipo = "Profesional";
+            };
+        }//bien
+        class Futbolista extends Persona {
+            constructor(id,nombre,apellido,edad,equipo,posicion,cantgoles){
+                super(id,nombre,apellido,edad);
+                this.equipo = equipo;
+                this.posicion = posicion;
+                this.cantgoles = cantgoles;
+                this.tipo = "futbolista";
+            };
+        }//bien
+
+        let p = '[{"id":1, "nombre":"Marcelo", "apellido":"Luque", "edad":45, "titulo":"Ingeniero", "facultad":"UTN", "añoGraduacion":2002},{"id":2, "nombre":"Ramiro", "apellido":"Escobar", "edad":35, "titulo":"Medico", "facultad":"UBA", "añoGraduacion":2012},{"id":3, "nombre":"Facundo", "apellido":"Cairo", "edad":30, "titulo":"Abogado", "facultad":"UCA", "añoGraduacion":2017},{"id":4, "nombre":"Fernando", "apellido":"Nieto", "edad":18, "equipo":"Independiente", "posicion":"Delantero", "cantidadGoles":7},{"id":5, "nombre":"Manuel", "apellido":"Loza", "edad":20, "equipo":"Racing", "posicion":"Volante", "cantidadGoles":2},{"id":6, "nombre":"Nicolas", "apellido":"Serrano", "edad":23, "equipo":"Boca", "posicion":"Arquero", "cantidadGoles":0}]'
+
+        class Modelo {
+            personas;
+            constructor(){};
+        }
+
+        class Vista{
+            formlista;
+            formabm;
+            constructor(){
+                this.formlista = {
+                    form: this.$("#formlista"), 
+                    filtro: this.$("#filtro"),
+                    inp: this.$("#edad1"),
+                    btn: this.$("#edad2"),
+                    chekbox: {
+                        chk_id: this.$("#ID"),
+                        chk_nombre: this.$("#Nombre"),
+                        chk_apellido: this.$("#Apellido"),
+                        chk_edad: this.$("#Edad"),
+                        chk_equipo: this.$("#Equipo"),
+                        chk_posocion: this.$("#Posicion"),
+                        chk_goles: this.$("#cantGoles"),
+                        chk_titulo: this.$("#titulo"),
+                        chk_facultad: this.$("#Facultad"),
+                        chk_añograd: this.$("#AñoGrad")
+                    },
+                    tabla: {
+                        tabla1: this.$("#tabla_1"),
+                        tbody: this.$("#tbody"),
+                        td_id: this.$("#tabla0"),
+                        td_nombre: this.$("#tabla1"),
+                        td_apellido: this.$("#tabla2"),
+                        td_edad: this.$("#tabla3"),
+                        td_equipo: this.$("#tabla4"),
+                        td_pocison: this.$("#tabla5"),
+                        td_cantgoles: this.$("#tabla6"),
+                        td_titulo: this.$("#tabla7"),
+                        td_facu: this.$("#tabla8"),
+                        td_añograd: this.$("#tabla9"),
+                    },
+                    btncalcular: this.$("#agregar"),
+                }//con la funcion me traigo el form por el id.
+            }//para manejar los form
+            
+            $(id){
+                return document.getElementById(id);
+            }
+
+            ocultarporchck(){
+                let encabezado = this.formlista.tabla.tabla1.querySelectorAll("td");
+                encabezado.forEach(e =>{
+                    if(e.getAttribute("columna") == "id1"){
+                        if(this.formlista.chekbox.chk_id.ckecked){
+                            e.style.display = 'block';
+                        }else{
+                            e.style.display = 'none';
+                        }
+                    }
+                    if(e.getAttribute("columna") == "nombre1"){
+                        if(this.formlista.chekbox.chk_nombre.ckecked){
+                            e.style.display = 'block';
+                        }else{
+                            e.style.display = 'none';
+                        }
+                    }
+                    if(e.getAttribute("columna") == "apellido1"){
+                        if(this.formlista.chekbox.chk_apellido.ckecked){
+                            e.style.display = 'block';
+                        }else{
+                            e.style.display = 'none';
+                        }
+                    }
+                    if(e.getAttribute("columna") == "edad10"){
+                        if(this.formlista.chekbox.chk_edad.ckecked){
+                            e.style.display = 'block';
+                        }else{
+                            e.style.display = 'none';
+                        }
+                    }
+                    if(e.getAttribute("columna") == "equipo1"){
+                        if(this.formlista.chekbox.chk_equipo.ckecked){
+                            e.style.display = 'block';
+                        }else{
+                            e.style.display = 'none';
+                        }
+                    }
+                    if(e.getAttribute("columna") == "posicion1"){
+                        if(this.formlista.chekbox.chk_posocion.ckecked){
+                            e.style.display = 'block';
+                        }else{
+                            e.style.display = 'none';
+                        }
+                    }
+                    if(e.getAttribute("columna") == "cantGoles1"){
+                        if(this.formlista.chekbox.chk_goles.ckecked){
+                            e.style.display = 'block';
+                        }else{
+                            e.style.display = 'none';
+                        }
+                    }
+                    if(e.getAttribute("columna") == "titulo1"){
+                        if(this.formlista.chekbox.chk_titulo.ckecked){
+                            e.style.display = 'block';
+                        }else{
+                            e.style.display = 'none';
+                        }
+                    }
+                    if(e.getAttribute("columna") == "facultad1"){
+                        if(this.formlista.chekbox.chk_facultad.ckecked){
+                            e.style.display = 'block';
+                        }else{
+                            e.style.display = 'none';
+                        }
+                    }
+                    if(e.getAttribute("columna") == "AñoGrad1"){
+                        if(this.formlista.chekbox.chk_añograd.ckecked){
+                            e.style.display = 'block';
+                        }else{
+                            e.style.display = 'none';
+                        }
+                    }
+                });//hay que hacerlo con todos
+            }//oculta segun selecciones los checks
+
+            dibujarfilas(array){
+                const tabla = document.getElementById("#tbody")
+                
+            }
+        }
+
+        class Control{
+            Vista1;
+            Modelo1;
+            constructor(p_vista , p_modelo , p){
+                this.Vista1 = p_vista;
+                this.Modelo1 = p_modelo;
+                this.cargainicial(p);
+                //this.registrarcontroladorchecks();
+            }
+            cargainicial(cadena) {
+                let array = JSON.parse(cadena);
+                this.Modelo1.personas = array.map((x) =>{
+                    if(x.equipo){
+                        return new Futbolista(x.id,x.nombre,x.apellido,x.edad,x.equipo,x.posicion,x.cantgoles)
+                    }else{
+                        return new Profecional(x.id, x.nombre, x.apellido, x.edad, x.titulo, x.facultad, x.añoGraduacion)
+                    }//si tiene equipo es un futbolista sino es un profecional
+
+                });
+            } //traigo los datos
+
+            registrarcontroladorchecks(){
+                this.Vista1.formlista.chekbox.chk_id.addEventListener("change" , (e)=>{this.Vista1.ocultarporchck()})
+                this.Vista1.formlista.chekbox.chk_nombre.addEventListener("change" , (e)=>{this.Vista1.ocultarporchck()})
+                this.Vista1.formlista.chekbox.chk_apellido.addEventListener("change" , (e)=>{this.Vista1.ocultarporchck()})
+                this.Vista1.formlista.chekbox.chk_edad.addEventListener("change" , (e)=>{this.Vista1.ocultarporchck()})
+                this.Vista1.formlista.chekbox.chk_equipo.addEventListener("change" , (e)=>{this.Vista1.ocultarporchck()})
+                this.Vista1.formlista.chekbox.chk_posocion.addEventListener("change" , (e)=>{this.Vista1.ocultarporchck()})
+                this.Vista1.formlista.chekbox.chk_goles.addEventListener("change" , (e)=>{this.Vista1.ocultarporchck()})
+                this.Vista1.formlista.chekbox.chk_titulo.addEventListener("change" , (e)=>{this.Vista1.ocultarporchck()})
+                this.Vista1.formlista.chekbox.chk_facultad.addEventListener("change" , (e)=>{this.Vista1.ocultarporchck()})
+                this.Vista1.formlista.chekbox.chk_añograd.addEventListener("change" , (e)=>{this.Vista1.ocultarporchck()})
+            }
+
+        }//manipula modelo y vista
+
+        
+
+        var modelo2 = new Modelo();
+        var vista2 = new Vista();
+        var control = new Control(vista2 , modelo2 , p);  
+
+
+    </script>
+
+    
+</body>
+</html>

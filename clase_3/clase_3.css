@@ -1,0 +1,105 @@
+/*
+.b6 {
+    font-weight: bold #peso de la topografia;
+    font-size: 10px #tamaño del texto;
+    font-style:#estilo de la tipografia;
+    
+}
+
+.b7{text-align: center;#ubicacion del texto 
+    font-family::after;#familia tipografica
+}
+
+.b8{
+    background-color: aliceblue;#color fondo
+    
+}
+.b8{
+    background-image: url(imagenes\usuario.png);fondo de imagen
+    
+}
+
+.caja {
+    width: 10px;ancho
+    height: 10px;alto
+    padding: auto;margen interior 
+    border:solid 5px ;borde
+    margin: -10px;marjen
+    box-sizing: border-box;calcula el borde , antes lo suma ahora lo resta
+}
+
+.posicion{
+    top: 50px;arriba
+    bottom:-10px;abajo
+    right:;derecha
+    left:;isquierda
+    posittion:relative;mueve la caja apartir de su pos original , sige ocuopando su propio espacio
+    position :absolut;mueve la caja y la quita de su pos original , los otros e ocupan su lugar
+    position :fixed; mueve la caja a una pos fija 
+    Z-INDEX:;permite ver que quiere q se vea por delante.
+    visiviliti:;permite seleccionar que mostrar en la pantalla
+
+}
+
+.unidades de medida{
+    em :empieza en 16px ,recomendado para tipografias
+    viewport:caja visible:
+    vh-vw: se adaptan al viewport
+
+}
+.medis queries:por convencion van abajo de todo
+
+@media (min-width:460px){
+    body{background: red;
+    }
+    .c1{
+    widht:;
+    heith:;
+    }
+etc.}
+*/
+
+
+.cont{
+    /*display: inline-block;/*comportamiendo de bloque*/
+    /*flex-direction: row;/*me lo pone en fila , hay mas(colum , row-reverse, etc)*/
+    /*flex-wrap: wrap;/*si se pasa de la visual lo pone abajo*/
+    /*justify-content: space-around;/*modifica la ubicacion de los elementos , distribulle los espacios disponibles de isquierda a derechax*/
+    background-color: white;
+    height: 300px;
+    /*align-content: start;/*apila de arriba o de abajo , distribulle de arriba para abajo */
+    /*css grid*/
+    display: grid;
+    grid-template-columns: 50px 300px 10px;/*defino columnas*/
+    grid-template-rows: 200px 75px ;/*defino filas*/
+
+}
+
+.c1{
+    width: 100px;
+    height: 30vh;
+    background-color: aqua;
+    /*align-self: center;/*puedo hacer que la caja se salga del contenedor*/
+    /*flex-wrap: 10px; /*cuanto espacio quiero q disponga*/
+}
+
+.c2{
+    width: 100px;
+    height: 30vh;
+    background-color: red;
+}
+
+.c3{
+    width: 100px;
+    height: 30vh;
+    background-color: yellow;
+}
+
+.c4{
+    width: 100px;
+    height: 30vh;
+    background-color: green;
+}
+
+
+

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/clase_2/tarea_c2.css">
+</head>
+<body>
+
+    <script>
+        //modelo de datos
+        //clases(objetos planos)
+        class Persona{
+        constructor(id,nombre,apellido,edad){
+            this.id = id;
+            this.apellido = apellido;
+            this.nombre = nombre;
+            this.edad = edad;
+            };
+        }//bien
+        class Profecional extends Persona{
+            constructor(id, nombre, apellido, edad, titulo, facultad, añoGraduacion) {
+            super(id, nombre, apellido, edad);
+            this.titulo = titulo;
+            this.facultad = facultad;
+            this.anioGraduacion = añoGraduacion;
+            this.tipo = "Profesional";
+            };
+        }//bien
+        class Futbolista extends Persona {
+            constructor(id,nombre,apellido,edad,equipo,posicion,cantgoles){
+                super(id,nombre,apellido,edad);
+                this.equipo = equipo;
+                this.posicion = posicion;
+                this.cantgoles = cantgoles;
+                this.tipo = "futbolista";
+            };
+        }//bien
+
+    </script>
+
+    <form class="b4" action="agregar">
+        
+        <div>
+        <h2 class="b1">form datos</h2>
+        <label for="filtro" >filtrar por:</label>
+        <select id="filtro" name="filtro" >
+            <option value="1"selected>todos</option>
+            <option value="2">futbolistas</option>
+            <option value="3">profesionales</option>
+        </select>
+        </div>
+
+        <div>
+            <label for="edad1">calcular edad promedio:</label>
+            <p id="edad2">--</p>
+            <button id="edad3" >calcular</button>
+        </div>
+        
+        <div>
+            <label for="columna">mostrar columnas:</label><br>
+            <label for="checkbox1">ID</label>
+            <input type="checkbox" id="ID" name="checkbox1">
+            <label for="checkbox2" >Nombre</label>
+            <input type="checkbox" id="Nombre" name="checkbox2">
+            <label for="checkbox3">Apellido</label>
+            <input type="checkbox" id="Apellido" name="checkbox3">
+            <label for="checkbox4">Edad</label>
+            <input type="checkbox" id="Edad" name="checkbox4">
+            <label for="checkbox5">Equipo</label>
+            <input type="checkbox" id="Equipo" name="checkbox5">
+            <label for="checkbox6">Posicion</label>
+            <input type="checkbox" id="Posicion" name="checkbox6">
+            <label for="checkbox7">cantGoles</label>
+            <input type="checkbox" id="cantGoles" name="checkbox7">
+            <label for="checkbox8">titulo</label>
+            <input type="checkbox" id="titulo" name="checkbox8">
+            <label for="checkbox9">Facultad</label>
+            <input type="checkbox" id="Facultad" name="checkbox9">
+            <label for="checkbox10">AñoGrad</label>
+            <input type="checkbox" id="AñoGrad" name="checkbox10">
+        </div>
+       
+        <div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td id="tabla">--</td>
+                        <td id="tabla1">--</td>
+                        <td id="tabla2">--</td>
+                        <td id="tabla3">--</td>
+                        <td id="tabla4">--</td>
+                        <td id="tabla5">--</td>
+                        <td id="tabla6">--</td>
+                        <td id="tabla7">--</td>
+                        <td id="tabla8">--</td>
+                        <td id="tabla9">--</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        <div>
+            <button id="agregar" >agregar</button>
+        </div>
+
+
+    <script>
+        
+        //traer los datos
+        let p = '[{"id":1, "nombre":"Marcelo", "apellido":"Luque", "edad":45, "titulo":"Ingeniero", "facultad":"UTN", "añoGraduacion":2002},{"id":2, "nombre":"Ramiro", "apellido":"Escobar", "edad":35, "titulo":"Medico", "facultad":"UBA", "añoGraduacion":2012},{"id":3, "nombre":"Facundo", "apellido":"Cairo", "edad":30, "titulo":"Abogado", "facultad":"UCA", "añoGraduacion":2017},{"id":4, "nombre":"Fernando", "apellido":"Nieto", "edad":18, "equipo":"Independiente", "posicion":"Delantero", "cantidadGoles":7},{"id":5, "nombre":"Manuel", "apellido":"Loza", "edad":20, "equipo":"Racing", "posicion":"Volante", "cantidadGoles":2},{"id":6, "nombre":"Nicolas", "apellido":"Serrano", "edad":23, "equipo":"Boca", "posicion":"Arquero", "cantidadGoles":0}]'
+        let j = JSON.parse(p);//bien
+        let colleccion = new Array(j);
+        
+        let datosprofecionales = j.filter(x => x.titulo);
+        let profesionales = datosprofecionales.map(x => 
+            new Profecional(x.id, x.nombre, x.apellido, x.edad, x.titulo, x.facultad, x.añoGraduacion)
+        );  
+
+        let datosFutbolistas = j.filter(x => x.equipo);
+        let futbolistas = datosFutbolistas.map(x => 
+            new Futbolista(x.id, x.nombre, x.apellido, x.edad, x.equipo, x.posicion, x.cantidadGoles)
+        );
+
+        //mostrar en pantalla los datos
+        function mostrar(id = String,id_tabla = String , lista){
+            const mostrar_tabla = document.querySelector(id);
+            const cuerpotablaid = document.querySelector(id_tabla);
+            mostrar_tabla.addEventListener("click" , async(event)=>{
+            cuerpotablaid.innerHTML = "";
+            lista.forEach(ids => {
+                const fila = document.createElement("tr");
+                if(id === "#ID"){
+                    fila.innerHTML = `
+                    <td>${ids.id}</td>`;
+                }
+                else if(id === "#Nombre"){
+                    fila.innerHTML = `
+                    <td>${ids.nombre}</td>`;
+                }
+                else if(id === "#Apellido"){
+                    fila.innerHTML = `
+                    <td>${ids.apellido}</td>`;
+                }
+                else if(id === "#Edad"){
+                    fila.innerHTML = `
+                    <td>${ids.edad}</td>`;
+                }
+                else if(id === "#Equipo"){
+                    fila.innerHTML = `
+                    <td>${ids.equipo}</td>`;
+                }
+                else if(id === "#Posicion"){
+                    fila.innerHTML = `
+                    <td>${ids.posicion}</td>`;    
+                }
+                else if(id === "#cantGoles"){
+                    fila.innerHTML = `
+                    <td>${ids.cantgoles}</td>`;    
+                }
+                else if(id === "#titulo"){
+                    fila.innerHTML = `
+                    <td>${ids.titulo}</td>`;    
+                }
+                else if(id === "#Facultad"){
+                    fila.innerHTML = `
+                    <td>${ids.facultad}</td>`;    
+                }
+                else if(id === "#AñoGrad"){
+                    fila.innerHTML = `
+                    <td>${ids.añoGraduacion}</td>`;    
+                }
+                
+                
+                cuerpotablaid.appendChild(fila);
+            });
+        });};
+        
+        //filtro
+        const filtrar = document.getElementById("filtro");
+        filtrar.addEventListener("change", async (event) => {
+            const valor = filtrar.value;
+            if(valor === "2"){
+                
+                calcular(futbolistas);
+                mostrar("#ID" , "#tabla" , futbolistas);
+                mostrar("#Nombre" , "#tabla1" , futbolistas);
+                mostrar("#Apellido" , "#tabla2" , futbolistas);
+                mostrar("#Edad" , "#tabla3" , futbolistas);
+                mostrar("#Equipo" , "#tabla4" , futbolistas);
+                mostrar("#Posicion" , "#tabla5" , futbolistas);
+                mostrar("#cantGoles" , "#tabla6" , futbolistas);
+            }else if(valor === "3"){
+                calcular(profesionales);
+                mostrar("#ID" , "#tabla" , profesionales);
+                mostrar("#Nombre" , "#tabla1" , profesionales);
+                mostrar("#Apellido" , "#tabla2" , profesionales);
+                mostrar("#Edad" , "#tabla3" , profesionales);
+                mostrar("#titulo" , "#tabla7" , profesionales);
+                mostrar("#Facultad" , "#tabla8" , profesionales);
+                mostrar("#AñoGrad" , "#tabla9" , profesionales);
+            }else if(valor === "1"){
+                calcular(profesionales);
+                mostrar("#ID" , "#tabla" , profesionales);
+                mostrar("#Nombre" , "#tabla1" , profesionales);
+                mostrar("#Apellido" , "#tabla2" , profesionales);
+                mostrar("#Edad" , "#tabla3" , profesionales);
+            };
+        });
+        
+        //calcular edad
+        function calcular(lista){
+            const calcular = document.querySelector("#edad3");
+        const devuelve = document.querySelector("#edad2")
+        calcular.addEventListener("click" , async (event) => {
+            event.preventDefault();
+            devuelve.innerHTML = "";
+            let dato = 0;
+            lista.forEach(edad => { 
+                dato += edad.edad; 
+            });
+            const promedio = dato / 4;
+            const resultadoElemento = document.createElement("textarea");
+            resultadoElemento.textContent = `${promedio}`;
+            devuelve.appendChild(resultadoElemento);
+            });
+        };
+       
+
+    </script>
+    
+</body>
+</html>

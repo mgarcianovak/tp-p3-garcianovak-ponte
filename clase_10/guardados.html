@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/clase10/serie.js"></script> 
+</head>
+<body>
+    <h1>series guardadas</h1>
+    <div id="series"></div>
+    <script >
+    window.addEventListener("DOMContentLoaded", () => {
+    const contenedor = document.getElementById("series");
+    const clave = "seriesGuardadas";
+
+    const guardadas = JSON.parse(localStorage.getItem(clave)) || [];
+
+    guardadas.forEach(data => {
+        const serie = new Serie(
+            data.id,
+            data.url,
+            data.name,
+            data.language,
+            data.generes,
+            data.image
+        );
+        
+        const elemento = serie.createHtmlElement();
+        contenedor.appendChild(elemento);
+    });
+});
+    </script>
+</body>
+</html>
